@@ -960,3 +960,197 @@ body {
    ============================================ */
 
 /* Applied via JS — see quiz.js addSVGDefs() */
+
+/* ============================================
+   Disclaimer & Footer
+   ============================================ */
+
+.disclaimer-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #F5F3FF;
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.disclaimer-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.disclaimer-box p {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.disclaimer-box p strong {
+  color: var(--primary);
+}
+
+.site-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 0 40px;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.site-footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.site-footer a:hover {
+  color: var(--primary);
+}
+
+/* ============================================
+   Rechtliche Seiten (Impressum / Datenschutz)
+   ============================================ */
+
+.legal-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.legal-header {
+  background: var(--primary-gradient);
+  padding: 40px var(--container-padding) 36px;
+  color: white;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: white;
+}
+
+.legal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.legal-subtitle {
+  font-size: 0.9375rem;
+  opacity: 0.75;
+}
+
+.legal-card {
+  background: var(--card);
+  border-radius: var(--card-radius);
+  padding: 28px 24px;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+.legal-section {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--separator);
+}
+
+.legal-section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.legal-section h2 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.legal-section h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.legal-section p {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.legal-section p:last-child {
+  margin-bottom: 0;
+}
+
+.legal-section ul {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  padding-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+}
+
+.legal-section ul li {
+  margin-bottom: 4px;
+}
+
+.legal-section a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.legal-section a:hover {
+  text-decoration: underline;
+}
+
+.legal-placeholder {
+  color: var(--error);
+  font-weight: 600;
+  background: var(--error-bg);
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.legal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 0 40px;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
+}
+
+.legal-footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.legal-footer a:hover {
+  color: var(--primary);
+}
