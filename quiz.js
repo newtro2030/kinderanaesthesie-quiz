@@ -434,6 +434,32 @@ document.addEventListener("DOMContentLoaded", () => {
   addSVGDefs();
   buildFlatQuestions();
   renderCategoryGrid();
+
+  // Statische Buttons – Event-Listener statt onclick-Attribut (CSP-konform)
+  document.getElementById("start-btn").addEventListener("click", startQuiz);
+  document.getElementById("category-start-btn").addEventListener("click", showQuestion);
+  document.getElementById("next-btn").addEventListener("click", nextQuestion);
+  document.getElementById("restart-btn").addEventListener("click", restartQuiz);
+
+  // Event-Delegation für dynamisch erzeugte Antwort-Buttons
+  document.getElementById("options-container").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-action]");
+    if (!btn || btn.classList.contains("disabled") || btn.disabled) return;
+
+    const action = btn.dataset.action;
+    if (action === "answer") {
+      const q = flatQuestions[currentIndex];
+      if (q.type === "truefalse") {
+        checkAnswer(btn.dataset.index === "true");
+      } else {
+        checkAnswer(parseInt(btn.dataset.index));
+      }
+    } else if (action === "toggle") {
+      toggleMultiple(parseInt(btn.dataset.index));
+    } else if (action === "confirm") {
+      checkMultipleAnswer();
+    }
+  });
 });
 
 
@@ -578,13 +604,13 @@ function renderQuestion() {
     const labels = ["A", "B", "C", "D", "E", "F"];
     const isMultiple = q.type === "multiple";
     container.innerHTML = options.map((opt, i) => `
-      <button class="option-btn" data-index="${i}" onclick="${isMultiple ? `toggleMultiple(${i})` : `checkAnswer(${i})`}">
+      <button class="option-btn" data-index="${i}" data-action="${isMultiple ? "toggle" : "answer"}">
         <span class="option-indicator ${isMultiple ? "checkbox" : ""}">${labels[i]}</span>
         <span>${opt}</span>
       </button>
     `).join("") + (isMultiple ? `
       <div class="confirm-btn-wrapper">
-        <button class="btn-confirm" id="confirm-multiple-btn" onclick="checkMultipleAnswer()" disabled>
+        <button class="btn-confirm" id="confirm-multiple-btn" data-action="confirm" disabled>
           Antwort bestätigen
         </button>
       </div>
@@ -606,11 +632,11 @@ function renderQuestion() {
 
 function buildTrueFalseOptions() {
   return `
-    <button class="option-btn" data-index="true" onclick="checkAnswer(true)">
+    <button class="option-btn" data-index="true" data-action="answer">
       <span class="option-indicator">R</span>
       <span>Richtig</span>
     </button>
-    <button class="option-btn" data-index="false" onclick="checkAnswer(false)">
+    <button class="option-btn" data-index="false" data-action="answer">
       <span class="option-indicator">F</span>
       <span>Falsch</span>
     </button>
@@ -657,7 +683,6 @@ function checkMultipleAnswer() {
   buttons.forEach((btn) => {
     const idx = parseInt(btn.dataset.index);
     btn.classList.add("disabled");
-    btn.onclick = null;
 
     if (correctSet.has(idx)) {
       btn.classList.add("correct");
@@ -704,7 +729,6 @@ function markSingleButtons(selected, correct) {
   buttons.forEach((btn) => {
     const idx = parseInt(btn.dataset.index);
     btn.classList.add("disabled");
-    btn.onclick = null;
 
     if (idx === correct) {
       btn.classList.add("correct");
@@ -723,7 +747,6 @@ function markTrueFalseButtons(selected, correct) {
   buttons.forEach((btn) => {
     const val = btn.dataset.index === "true";
     btn.classList.add("disabled");
-    btn.onclick = null;
 
     if (val === correct) {
       btn.classList.add("correct");
